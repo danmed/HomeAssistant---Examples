@@ -1,0 +1,11 @@
+platform: command_line
+sonoff_test3:
+       command_on: '/usr/bin/curl -X GET "http://192.168.2.200/control?cmd=gpio,12,1"'
+       command_off: '/usr/bin/curl -X GET "http://192.168.2.200/control?cmd=gpio,12,0"'
+       command_state: '/usr/bin/curl -X GET "http://192.168.2.200/control?cmd=status,gpio,12"'
+       value_template: >-
+         {%- if value_json.state == 1 -%}
+         {{ true }}
+         {%- else -%}
+         {{ false }}
+         {%- endif -%}
